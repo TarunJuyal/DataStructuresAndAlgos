@@ -59,7 +59,7 @@ public class MyTrieUsingArray {
         for(char c : word.toCharArray()){
             int index=c-'a';
             if(current.children[index]==null)
-                throw new NoSuchElementException();
+                return;
             current=current.children[index];
         }
         current.isEndOfWord=false;
