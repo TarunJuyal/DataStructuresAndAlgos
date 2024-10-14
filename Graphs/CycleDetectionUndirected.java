@@ -21,8 +21,8 @@ package Graphs;
             if (visited.contains(neighbour) && parent != null && !neighbour.equals(parent.label))
                 return true;
             //  if neighbour don't exist do dfs
-            if(!visited.contains(neighbour))
-                return isCycleHelper(this.vertices.get(neighbour),visited,this.vertices.get(vertex.label));
+            if(!visited.contains(neighbour) && isCycleHelper(this.vertices.get(neighbour),visited,this.vertices.get(vertex.label)))
+                return true;
         }
         return false;
     }
