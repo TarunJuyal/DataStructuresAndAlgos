@@ -9,7 +9,7 @@ package Graphs;
             return false;
         Set<String> visited = new HashSet<>();
         for(Map.Entry<String,Vertex> vertex : this.vertices.entrySet())
-            if(!visited.contains(vertex.getKey()) && isCycleHelper(vertex.getValue(),visited,null))
+            if (!visited.contains(vertex.getKey()) && isCycleHelper(vertex.getValue(), visited, null))
                 return true;
         return false;
     }
@@ -17,11 +17,11 @@ package Graphs;
         //  add to visited set
         visited.add(vertex.label);
         for(String neighbour: vertex.neighbours.keySet()) {
-            //  if neighbour is already traversed and it's not the current vertex parent than cycle exist
-            if (visited.contains(neighbour) && parent != null && !neighbour.equals(parent.label))
-                return true;
-            //  if neighbour don't exist do dfs
-            if(!visited.contains(neighbour) && isCycleHelper(this.vertices.get(neighbour),visited,this.vertices.get(vertex.label)))
+            //  if neighbour is current's parent
+            if (parent != null && neighbour.equals(parent.label))
+                continue;
+            //  if visited contains neighbour then cycle exist or do recursion
+            if(visited.contains(neighbour) || isCycleHelper(this.vertices.get(neighbour),visited,this.vertices.get(vertex.label)))
                 return true;
         }
         return false;
